@@ -121,18 +121,57 @@ def create_all_plots(data, sessions, sub_ofs):
     # plt.show()
     plt.savefig('figure_1.png')
 
+def generate_data_list(data, sessions):
+    data_points = []
+    for session in sessions:
+        session_data = data[session]
+        data_points.extend(list(map(getSolveTime, session_data)))
 
+    return data_points 
 
+def create_list_of_averages(data, sessions, avgOf):
+    data_points = generate_data_list(data, sessions)
+    num_solves = len(data_points)
+    data_points = np.array(data_points) / 1000
+
+    # avgOf = 5
+    list_of_averages = []
+    for i in range(num_solves - avgOf):
+        subset = data_points[i:i+avgOf]
+        avg = np.average(subset)
+        list_of_averages.append(avg)
+    return list_of_averages
+
+def create_averages_plot(data, sessions, avgOf):
+    list_of_averages = create_list_of_averages(data, sessions, avgOf)
+
+    np.random.choice
+
+    x = np.arange(1, len(list_of_averages)+1).astype(int)
+
+    ind = np.sort(np.random.choice(x, size=(1000,), replace=False))
+    x = ind.astype(int)
+    # print(x)
+    list_of_averages = np.array(list_of_averages)
+    list_of_averages = list_of_averages[x]
+    a, b = np.polyfit(x, list_of_averages, 1)
+
+    plt.plot(x, list_of_averages, '-o')
+    plt.plot(x, a*x+b, color='orange', linestyle='--', linewidth=2)
+
+    plt.show()
+
+    
 
 exclude_sessions = [1]
 
 sub_ofs = [20, 18, 15, 14, 13, 12, 11, 10]
 
 sessions = find_all_sessions(data, exclude_sessions)
-# print(generate_data(data, sessions, 20))
+# create_all_plots(data, sessions, sub_ofs)
 
-# f = create_plot(data, sessions, 20)
-# f.show()
+# data_points = generate_data_list(data, sessions)
+# print(len(data_points))
 
-create_all_plots(data, sessions, sub_ofs)
+create_averages_plot(data, sessions, 5)
 
