@@ -52,11 +52,11 @@ def generateStats(session):
 # Sub-20: %% , Num of Solves: ##
 # Sub-15: %% , Num of Solves: ##
 
-f = open('cstimer_20230123_112143.txt')
+f = open('cstimer_20230206_003150.txt')
 data = json.load(f)
-session = data['session1']
+session = data['session27']
 # session = np.array(list(map(getSolveTime, session))) / 1000 
-session = session[1500:]
+# session = session[1500:]
 getTotalNumSolves(session)
 getSubOf(session, 20)
 getSubOf(session, 15)

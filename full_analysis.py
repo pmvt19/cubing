@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt 
 import time 
 
-f = open('cstimer_20230123_120616.txt')
+f = open('cstimer_20230607_140732.txt')
 data = json.load(f)
 
 def find_all_sessions(data, exclude_sessions):
@@ -168,10 +168,10 @@ exclude_sessions = [1]
 sub_ofs = [20, 18, 15, 14, 13, 12, 11, 10]
 
 sessions = find_all_sessions(data, exclude_sessions)
-# create_all_plots(data, sessions, sub_ofs)
+create_all_plots(data, sessions, sub_ofs)
 
 # data_points = generate_data_list(data, sessions)
 # print(len(data_points))
 
-create_averages_plot(data, sessions, 5)
+# create_averages_plot(data, sessions, 5)
 
